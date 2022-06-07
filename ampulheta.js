@@ -1,9 +1,11 @@
 function inputCapture() {
-  const input = prompt("Informe um número a partir de 20 para o tamanho da ampulheta:");
+  input = prompt("Informe um número a partir de 20 para o tamanho da ampulheta:");
 
-  inputValidation(input);
-
-  return input
+  if (input < 20) {
+    alert("O número digitado deve ser a partir de 20");
+    inputCapture();
+  }
+  return input;
 }
 
 function inputValidation(value) {
@@ -11,9 +13,11 @@ function inputValidation(value) {
     alert("O número digitado deve ser a partir de 20");
     inputCapture();
   }
+
+  return true;
 }
 
-let inputValue = inputCapture();
+const inputValue = inputCapture();
 
 function CreateHourglassExtremities(value) {
   character = "#";
@@ -24,20 +28,31 @@ function CreateHourglassExtremities(value) {
   return string;
 }
 
+function divider(value) {
+  character = "-";
+
+  characters = character.repeat(value);
+  string = ("-" + characters + "-");
+
+  return string;
+}
+
+let dividerHourglass = divider(inputValue);
+
 const hourglassExtremities = CreateHourglassExtremities(inputValue);
 
 function CreateHourglassTop(value) {
 
   let firstHalfHourglass = [];
-  for (let i = 0; i < value; i++) { //quantidade inserida pelo usuário
+  for (let i = 0; i < value; i++) {
 
     character = "#";
     space = " ";
 
-    for (let j = 0; j <= i; j++) { //ocorre a quantidade de vezes do i atual
+    for (let j = 0; j <= i; j++) {
 
-      numberOfSpace = j; //quantidade de espaços em branco recebe o valor atual do j
-      numberOfCharacter = value - numberOfSpace * 2; //quantidade de #
+      numberOfSpace = j;
+      numberOfCharacter = value - numberOfSpace * 2;
 
       if (numberOfCharacter > 0) {
         characters = character.repeat(numberOfCharacter);
@@ -46,7 +61,7 @@ function CreateHourglassTop(value) {
       }
     }
 
-    if (numberOfCharacter > 0) { // quanto das as linhas foram preenchidas imprime a string/matriz
+    if (numberOfCharacter > 0) {
       firstHalfHourglass.push(string)
     }
   }
@@ -65,14 +80,14 @@ function CreateHourglassBottom(value) {
 
     for (let j = 0; j <= i; j++) {
 
-      numberOfSpaces = value - j; //aqui muda
+      numberOfSpaces = value - j;
       numberOfNoCharacter = value - numberOfSpaces * 2;
 
-      if (numberOfNoCharacter > 0) { //aqui muda
+      if (numberOfNoCharacter > 0) {
 
-        no_characters = no_character.repeat(numberOfNoCharacter); //aqui muda
-        spaces = space.repeat(numberOfSpaces - 1); //aqui muda
-        string = ("#" + spaces + "#" + no_characters + "#" + spaces + "#");// aqui muda
+        no_characters = no_character.repeat(numberOfNoCharacter);
+        spaces = space.repeat(numberOfSpaces - 1);
+        string = ("#" + spaces + "#" + no_characters + "#" + spaces + "#");
       }
     }
     if (numberOfNoCharacter > 0) {
@@ -89,13 +104,31 @@ function printHourglass() {
   console.log(hourglassExtremities)
   hourglassTop.map(line => {
     console.log(line)
-  })
+  });
 
   hourglassBottom.map(line => {
     console.log(line)
-  })
-  console.log(hourglassExtremities)
+  });
+  console.log(hourglassExtremities);
+  console.log(`n=${inputValue}`);
+}
 
+function printFilledHourglass() {
+  let filledHourglassBottom = hourglassTop.reverse();
+  let filledHourglassTop = hourglassBottom.reverse();
+
+  console.log(hourglassExtremities)
+  filledHourglassTop.map(line => {
+    console.log(line)
+  });
+
+  filledHourglassBottom.map(line => {
+    console.log(line)
+  });
+  console.log(hourglassExtremities)
+  console.log(`n=${inputValue}`);
 }
 
 printHourglass();
+console.log(dividerHourglass);
+printFilledHourglass();
