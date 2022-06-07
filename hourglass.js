@@ -8,15 +8,6 @@ function inputCapture() {
   return input;
 }
 
-function inputValidation(value) {
-  if (value < 20) {
-    alert("O número digitado deve ser a partir de 20");
-    inputCapture();
-  }
-
-  return true;
-}
-
 const inputValue = inputCapture();
 
 function CreateHourglassExtremities(value) {
@@ -28,6 +19,8 @@ function CreateHourglassExtremities(value) {
   return string;
 }
 
+const hourglassExtremities = CreateHourglassExtremities(inputValue);
+
 function divider(value) {
   character = "-";
 
@@ -38,8 +31,6 @@ function divider(value) {
 }
 
 let dividerHourglass = divider(inputValue);
-
-const hourglassExtremities = CreateHourglassExtremities(inputValue);
 
 function CreateHourglassTop(value) {
 
@@ -98,7 +89,6 @@ function CreateHourglassBottom(value) {
 }
 
 const hourglassBottom = CreateHourglassBottom(inputValue);
-
 
 function printHourglass() {
   console.log(hourglassExtremities)
